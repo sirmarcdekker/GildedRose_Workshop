@@ -23,7 +23,7 @@ public class GildedRoseSteps {
     @When("^Quality is updated (\\d+) times$")
     public void qualityIsUpdatedTimeS(Integer times) {
         for (int i = 0; i < times; i++) {
-            app.updateQuality();
+            app.dailyQualityUpdate();
         }
     }
 
@@ -33,6 +33,6 @@ public class GildedRoseSteps {
         Assert.assertTrue(item.isPresent());
         Item actualItem = item.get();
         assertThat(actualItem.quality, equalTo(quality));
-        assertThat(actualItem.sellIn, equalTo(sellIn));
+        assertThat(actualItem.sellInDays, equalTo(sellIn));
     }
 }
