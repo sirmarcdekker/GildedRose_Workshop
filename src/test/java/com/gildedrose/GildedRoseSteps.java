@@ -32,7 +32,7 @@ public class GildedRoseSteps {
         Optional<Item> item = Arrays.stream(app.items).filter(i -> i.name.equals(name)).findFirst();
         Assert.assertTrue(item.isPresent());
         Item actualItem = item.get();
-        assertThat(actualItem.quality, equalTo(quality));
+        assertThat(actualItem.getQuality(), equalTo(quality));
         assertThat(actualItem.sellInDays, equalTo(sellIn));
     }
 }
