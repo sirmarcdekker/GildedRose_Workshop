@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import com.gildedrose.items.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,8 +17,21 @@ public class GildedRoseSteps {
 
     @Given("^\"([^\"]*)\" has a quality of (-?\\d+) and a sell in of (-?\\d+)$")
     public void hasAQualityOfAndASellInOf(String name, Integer quality, Integer sellIn) {
-        Item[] items = new Item[]{new Item(name, sellIn, quality)};
+        Item[] items = new Item[]{createItem(name, quality, sellIn)};
         app = new GildedRose(items);
+    }
+
+    private Item createItem(String name, Integer quality, Integer sellIn) {
+        switch (name) {
+            case (BrieItem.NAME):
+                return new BrieItem(sellIn, quality);
+            case (BackstagePassItem.NAME):
+                return new BackstagePassItem(sellIn, quality);
+            case (SulfurasItem.NAME):
+                return new SulfurasItem(sellIn, quality);
+            default:
+                return new DefaultItem(name, sellIn, quality);
+        }
     }
 
     @When("^Quality is updated (\\d+) times$")

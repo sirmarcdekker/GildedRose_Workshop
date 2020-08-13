@@ -1,6 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.items;
 
-public class Item {
+public abstract class Item {
     private static final int MAX_QUALITY = 50;
     private static final int MIN_QUALITY = 0;
 
@@ -36,4 +36,18 @@ public class Item {
     public String toString() {
         return this.name + ", " + this.sellInDays + ", " + this.quality;
     }
+
+    public void dailyUpdate() {
+        standardDailyQualityUpdate();
+
+        this.sellInDays--;
+
+        if (this.sellInDays < 0) {
+            updateQualityOnSellInBelowZero();
+        }
+    }
+
+    protected abstract void standardDailyQualityUpdate();
+
+    protected abstract void updateQualityOnSellInBelowZero();
 }
